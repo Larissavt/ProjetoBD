@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Bela Pele</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #ffcccc;
+        }
+
+        .form-group-status {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group-status label {
+            margin-right: 15px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #ffe0e0;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffcccc;
+        }
+
+        button[type="reset"] {
+            background-color: #e0f7e9;
+        }
+
+        button[type="reset"]:hover {
+            background-color: #cceee0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agendamento</h1>
+        <form>
+            <!-- Data do Agendamento -->
+            <div class="form-group">
+                <label for="dt_agenda">Data do Agendamento</label>
+                <input type="date" id="dt_agenda" name="dt_agenda" required>
+            </div>
+
+            <!-- Hora do Agendamento -->
+            <div class="form-group">
+                <label for="hr_agenda">Hora do Agendamento</label>
+                <input type="time" id="hr_agenda" name="hr_agenda" required>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group form-group-status">
+                <label>Status:</label>
+                <label>
+                    <input type="radio" name="status" value="A" required> Ativo
+                </label>
+                <label>
+                    <input type="radio" name="status" value="I"> Inativo
+                </label>
+            </div>
+
+            <!-- Valor Total -->
+            <div class="form-group">
+                <label for="vl_total">Valor Total</label>
+                <input type="number" id="vl_total" name="vl_total" step="0.01" required>
+            </div>
+
+            <!-- Cliente -->
+            <div class="form-group">
+                <label for="id_cliente">Cliente</label>
+                <select id="id_cliente" name="id_cliente" required>
+                    <option value="">Selecione o Cliente</option>
+                    <option value="1">Cliente 1</option>
+                    <option value="2">Cliente 2</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            </div>
+
+            <!-- Forma de Pagamento -->
+            <div class="form-group">
+                <label for="id_forma_pagto">Forma de Pagamento</label>
+                <select id="id_forma_pagto" name="id_forma_pagto" required>
+                    <option value="">Selecione a Forma de Pagamento</option>
+                    <option value="1">Cartão</option>
+                    <option value="2">Dinheiro</option>
+                    <option value="3">Pix</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            </div>
+
+            <!-- Profissional -->
+            <div class="form-group">
+                <label for="id_profissional">Profissional</label>
+                <select id="id_profissional" name="id_profissional" required>
+                    <option value="">Selecione o Profissional</option>
+                    <option value="1">Profissional 1</option>
+                    <option value="2">Profissional 2</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            </div>
+
+            <!-- Serviço -->
+            <div class="form-group">
+                <label for="id_servico">Serviço</label>
+                <select id="id_servico" name="id_servico" required>
+                    <option value="">Selecione o Serviço</option>
+                    <option value="1">Limpeza de Pele</option>
+                    <option value="2">Tratamento Facial</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            </div>
+
+            <!-- Usuário -->
+            <div class="form-group">
+                <label for="id_usuario">Usuário</label>
+                <select id="id_usuario" name="id_usuario" required>
+                    <option value="">Selecione o Usuário</option>
+                    <option value="1">Usuário 1</option>
+                    <option value="2">Usuário 2</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            </div>
+
+            <!-- Botões -->
+            <div class="form-actions">
+                <button type="submit">Salvar</button>
+                <button type="reset">Limpar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

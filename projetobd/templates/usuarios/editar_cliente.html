@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cliente - Bela Pele</title>
+    <style>
+        /* Estilo geral do corpo da página - Usa o fundo da tela principal */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Cor de fundo da tela principal */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Usa min-height para garantir que o conteúdo não fique "apertado" */
+            flex-direction: column; /* Para navbar fixa e conteúdo abaixo */
+            color: #333; /* Cor de texto padrão */
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            width: 100%;
+            background-color: #ffe0e0; /* Rosa claro para a navbar */
+            overflow: auto;
+            padding: 10px 0;
+            position: fixed; /* Fixa no topo */
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave na navbar */
+            display: flex;
+            justify-content: flex-start; /* Alinha os itens à esquerda */
+            align-items: center;
+        }
+        .navbar a {
+            padding: 12px 24px;
+            color: #555; /* Cor do texto dos links da navbar */
+            text-decoration: none;
+            font-size: 17px;
+            border-radius: 8px; /* Bordas arredondadas para os links */
+            margin-right: 15px; /* Mais espaço entre os links */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #ffcccc; /* Rosa mais escuro ao passar o mouse */
+            color: #333; /* Cor do texto mais escura no hover */
+        }
+
+        /* Contêiner principal que agrupa o formulário e o link */
+        .container {
+            text-align: center;
+            background-color: #ffffff; /* Fundo branco, igual às outras telas */
+            padding: 40px; /* Padding generoso */
+            border-radius: 15px; /* Bordas arredondadas da tela principal */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra pronunciada */
+            width: 100%;
+            max-width: 500px; /* Largura ajustada para o formulário */
+            box-sizing: border-box;
+            margin-top: 100px; /* Espaço para a navbar fixa */
+            margin-bottom: 20px; /* Espaço na parte inferior */
+        }
+
+        /* Estilo do título */
+        h2 {
+            color: #333; /* Cor escura para o texto do título */
+            margin-bottom: 30px; /* Mais espaço abaixo do título */
+            font-size: 28px;
+        }
+
+        /* Estilo para as etiquetas (Nome, CPF, etc.) */
+        label {
+            display: block;
+            text-align: left; /* Alinha o texto do rótulo à esquerda */
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555; /* Cor de texto um pouco mais clara */
+            font-size: 15px;
+        }
+
+        /* Estilo para os campos de texto e email */
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px; /* Mais padding */
+            margin-bottom: 25px; /* Mais espaço abaixo de cada campo */
+            border: 1px solid #e0e0e0; /* Borda suave */
+            border-radius: 8px; /* Bordas mais arredondadas */
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s ease; /* Transição suave na borda */
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #ffcccc; /* Borda rosa ao focar */
+        }
+
+        /* Estilo do botão de salvar */
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px; /* Mais padding */
+            background-color: #ffe0e0; /* Rosa claro dos botões da tela principal */
+            color: #333; /* Cor de texto para contraste */
+            border: none;
+            border-radius: 8px; /* Bordas arredondadas */
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Efeito suave */
+            margin-top: 10px; /* Espaço acima do botão */
+        }
+
+        /* Efeito ao passar o mouse sobre o botão */
+        button[type="submit"]:hover {
+            background-color: #ffcccc; /* Rosa mais escuro */
+            transform: translateY(-2px); /* Efeito de "levantar" */
+        }
+
+        /* Estilo do link "Voltar" */
+        .link-voltar {
+            display: inline-block; /* Permite margem e padding */
+            margin-top: 30px; /* Mais espaço acima do link */
+            padding: 10px 20px;
+            color: #555; /* Cor de texto cinza para combinar */
+            background-color: #f0f0f0; /* Fundo cinza suave, como o botão "Sair" do login */
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Efeito ao passar o mouse sobre o link */
+        .link-voltar:hover {
+            background-color: #e0e0e0; /* Cinza mais escuro */
+            color: #333;
+            transform: translateY(-2px); /* Efeito de "levantar" */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        {# Removido: <a href="{% url 'cadastrar_cliente' %}">Novo Cliente +</a> #}
+        <a href="{% url 'cliente' %}">Lista de Clientes</a>
+    </div>
+
+    <div class="container">
+        <h2>Editar Cliente</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ nome }}" required><br>
+
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" value="{{ cpf }}" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ email }}" required><br>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" value="{{ telefone }}" required><br>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+
+</body>
+</html>

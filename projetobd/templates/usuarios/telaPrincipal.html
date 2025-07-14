@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tela Principal - Bela Pele</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .button {
+            background-color: #ffe0e0;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .button:hover {
+            background-color: #ffcccc;
+        }
+        .button-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .button-label {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tela Principal</h1>
+        <div class="button-grid">
+            <!-- Botão Cliente como link -->
+            <a href="{% url 'cliente' %}" class="button">
+                <div class="button-icon">👥</div>
+                <div class="button-label">Cliente</div>
+            </a>
+            <div class="button">
+                <div class="button-icon">📅</div>
+                <div class="button-label">Agendamento</div>
+            </div>
+            <div class="button">
+                <div class="button-icon">💧</div>
+                <div class="button-label">Serviço</div>
+            </div>
+            <div class="button">
+                <div class="button-icon">💳</div>
+                <div class="button-label">Forma de Pagamento</div>
+            </div>
+            <div class="button">
+                <div class="button-icon">👔</div>
+                <div class="button-label">Profissional</div>
+            </div>
+            <div class="button">
+                <div class="button-icon">📈</div>
+                <div class="button-label">Relatório</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

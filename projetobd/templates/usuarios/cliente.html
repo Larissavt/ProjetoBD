@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes - Bela Pele</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Cor de fundo da tela principal */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Cor de texto padrão mais escura */
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            width: 100%;
+            background-color: #ffe0e0; /* Rosa claro para a navbar */
+            overflow: auto;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave na navbar */
+            display: flex;
+            justify-content: flex-start; /* Alinha os itens à esquerda */
+            align-items: center;
+        }
+        .navbar a {
+            padding: 12px 24px;
+            color: #555; /* Cor do texto dos links da navbar */
+            text-decoration: none;
+            font-size: 17px;
+            border-radius: 8px; /* Bordas arredondadas para os links */
+            margin-right: 15px; /* Mais espaço entre os links */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #ffcccc; /* Rosa mais escuro ao passar o mouse */
+            color: #333; /* Cor do texto mais escura no hover */
+        }
+
+        /* --- Container Principal --- */
+        .container {
+            background-color: #fff; /* Fundo branco do contêiner da tela principal */
+            padding: 30px; /* Padding generoso */
+            border-radius: 15px; /* Bordas arredondadas da tela principal */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+            margin: 100px auto 20px auto; /* Ajuste para o navbar fixo */
+            width: 90%;
+            max-width: 900px; /* Um pouco mais largo para a tabela */
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #333; /* Cor do título */
+            margin-bottom: 25px;
+            font-size: 28px;
+            text-align: center; /* Centraliza o título */
+        }
+
+        /* --- Tabela de Clientes --- */
+        table {
+            width: 100%;
+            border-collapse: separate; /* Permite border-spacing */
+            border-spacing: 0 8px; /* Espaço entre as linhas */
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px 15px; /* Mais padding nas células */
+            text-align: left;
+            border: none; /* Remove bordas individuais de células */
+        }
+        th {
+            background-color: #f2f2f2; /* Fundo do cabeçalho da tabela */
+            font-weight: bold;
+            color: #555;
+            border-bottom: 2px solid #ddd; /* Borda inferior mais distinta */
+        }
+        tr {
+            background-color: #ffffff; /* Fundo branco para cada linha */
+            transition: background-color 0.3s ease;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Fundo levemente diferente para linhas pares */
+        }
+        tr:hover {
+            background-color: #fffafb; /* Rosa muito sutil ao passar o mouse */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave na linha ao hover */
+        }
+
+        /* Estilo para as bordas arredondadas nas células da primeira e última coluna */
+        td:first-child, th:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        td:last-child, th:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        /* --- Botões de Ação na Tabela --- */
+        /* Estilo para o formulário de exclusão dentro da célula da tabela */
+        .delete-form {
+            display: inline-block; /* Permite que o botão e o formulário fiquem na mesma linha */
+            margin: 0;
+            padding: 0;
+        }
+
+        .botao {
+            padding: 8px 18px; /* Padding ajustado para os botões da tabela */
+            border: none;
+            border-radius: 6px; /* Bordas arredondadas para os botões */
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 8px; /* Espaço entre os botões */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .botao-editar {
+            background-color: #2196F3; /* Azul para editar */
+        }
+        .botao-editar:hover {
+            background-color: #1a7bbd;
+            transform: translateY(-1px);
+        }
+        .botao-excluir {
+            background-color: #F44336; /* Vermelho para excluir */
+        }
+        .botao-excluir:hover {
+            background-color: #d32f2f;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'cadastrar_cliente' %}">Novo Cliente +</a>
+    </div>
+
+    <div class="container">
+        <h2>Clientes Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefone }}</td>
+                    <td>
+                        <a href="{% url 'editar_cliente' cliente.id %}" class="botao botao-editar">Editar</a>
+                        <form action="{% url 'excluir_cliente' cliente.id %}" method="post" class="delete-form" onsubmit="return confirmarExclusao('{{ cliente.nome }}');">
+                            {% csrf_token %}
+                            <button type="submit" class="botao botao-excluir">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function confirmarExclusao(nomeCliente) {
+            // Exibe um pop-up de confirmação.
+            // Se o usuário clicar em "OK", retorna true e o formulário é enviado (POST).
+            // Se o usuário clicar em "Cancelar", retorna false e o envio do formulário é impedido.
+            return confirm('Tem certeza que deseja excluir o cliente ' + nomeCliente + '? Esta ação não pode ser desfeita.');
+        }
+    </script>
+</body>
+</html>
