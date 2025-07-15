@@ -92,31 +92,20 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cadastro de Profissional</h1>
-        <!-- Formulário enviado via POST -->
-        <form method="POST" action="{% url 'profissional' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite o nome do profissional" required>
-            </div>
+    <h1>Cadastrar Novo Profissional</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" required><br>
 
-            <div class="form-group">
-                <label for="especialidade">Especialidade</label>
-                <input type="text" id="especialidade" name="especialidade" placeholder="Digite a especialidade" required>
-            </div>
+        <label for="especialidade">Especialidade:</label><br>
+        <input type="text" id="especialidade" name="especialidade" required><br>
 
-            <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
-            </div>
+        <label for="telefone">Telefone:</label><br>
+        <input type="text" id="telefone" name="telefone" required><br><br>
 
-            <div class="form-actions">
-                <button type="submit">Salvar</button>
-                <button type="reset">Limpar</button>
-            </div>
-        </form>
-    </div>
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'listar_profissionais' %}">Cancelar</a>
 </body>
-</html
+</html>

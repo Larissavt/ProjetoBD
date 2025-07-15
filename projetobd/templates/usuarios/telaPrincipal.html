@@ -57,31 +57,26 @@
     <div class="container">
         <h1>Tela Principal</h1>
         <div class="button-grid">
-            <!-- Botão Cliente como link -->
             <a href="{% url 'cliente' %}" class="button">
                 <div class="button-icon">👥</div>
                 <div class="button-label">Cliente</div>
             </a>
-            <div class="button">
+            <a href="{% url 'listar_agendamentos' %}" class="button">
                 <div class="button-icon">📅</div>
                 <div class="button-label">Agendamento</div>
-            </div>
-            <div class="button">
+            </a>
+            <a href="{% url 'listar_servicos' %}" class="button">
                 <div class="button-icon">💧</div>
                 <div class="button-label">Serviço</div>
-            </div>
-            <div class="button">
+            </a>
+            <a href="{% url 'listar_formas_pagamento' %}" class="button">
                 <div class="button-icon">💳</div>
                 <div class="button-label">Forma de Pagamento</div>
-            </div>
-            <div class="button">
+            </a>
+            <a href="{% url 'listar_profissionais' %}" class="button">
                 <div class="button-icon">👔</div>
                 <div class="button-label">Profissional</div>
-            </div>
-            <div class="button">
-                <div class="button-icon">📈</div>
-                <div class="button-label">Relatório</div>
-            </div>
+            </a>
         </div>
     </div>
 </body>

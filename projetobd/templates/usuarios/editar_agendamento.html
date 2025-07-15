@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Agendamento</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 20px; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 600px; width: 90%; }
+        h1 { text-align: center; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 14px; margin-bottom: 5px; color: #666; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box;}
+        .actions { margin-top: 20px; display: flex; justify-content: space-between; }
+        .btn { text-decoration: none; color: #333; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px; transition: background-color 0.3s; }
+        .btn-save { background-color: #e0f7e9; }
+        .btn-cancel { background-color: #ffe0e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Agendamento</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="dt_agenda">Data</label>
+                <input type="date" id="dt_agenda" name="dt_agenda" value="{{ agendamento.dt_agenda }}" required>
+            </div>
+            <div class="form-group">
+                <label for="hr_agenda">Hora</label>
+                <input type="time" id="hr_agenda" name="hr_agenda" value="{{ agendamento.hr_agenda }}" required>
+            </div>
+            <div class="form-group">
+                <label for="id_cliente">Cliente</label>
+                <select id="id_cliente" name="id_cliente" required>
+                    {% for id, nome in clientes %}
+                        <option value="{{ id }}" {% if id == agendamento.id_cliente %}selected{% endif %}>{{ nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_profissional">Profissional</label>
+                <select id="id_profissional" name="id_profissional" required>
+                    {% for id, nome in profissionais %}
+                        <option value="{{ id }}" {% if id == agendamento.id_profissional %}selected{% endif %}>{{ nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_servico">Serviço</label>
+                <select id="id_servico" name="id_servico" required>
+                    {% for id, descricao in servicos %}
+                        <option value="{{ id }}" {% if id == agendamento.id_servico %}selected{% endif %}>{{ descricao }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+             <div class="form-group">
+                <label for="id_forma_pagto">Forma de Pagamento</label>
+                <select id="id_forma_pagto" name="id_forma_pagto" required>
+                    {% for id, descricao in formas_pagamento %}
+                        <option value="{{ id }}" {% if id == agendamento.id_forma_pagto %}selected{% endif %}>{{ descricao }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="vl_total">Valor Total</label>
+                <input type="number" id="vl_total" name="vl_total" value="{{ agendamento.vl_total }}" step="0.01" required>
+            </div>
+            <div class="actions">
+                <button type="submit" class="btn btn-save">Salvar Alterações</button>
+                <a href="{% url 'listar_agendamentos' %}" class="btn btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

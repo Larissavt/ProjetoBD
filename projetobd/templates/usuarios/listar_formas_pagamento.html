@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Profissionais</title>
+    <title>Formas de Pagamento</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 20px; }
         .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
@@ -19,38 +19,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>Profissionais Cadastrados</h1>
-        <p>Gerencie os profissionais da sua clínica.</p>
-        
+        <h1>Formas de Pagamento</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Especialidade</th>
-                    <th>Telefone</th>
+                    <th>Descrição</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                {% for profissional in profissionais %}
+                {% for forma in formas_pagamento %}
                     <tr>
-                        <td>{{ profissional.nome }}</td>
-                        <td>{{ profissional.especialidade }}</td>
-                        <td>{{ profissional.telefone }}</td>
+                        <td>{{ forma.descricao }}</td>
                         <td class="actions">
-                            <a href="{% url 'editar_profissional' profissional.id %}" class="edit-btn">Editar</a>
-                            <a href="{% url 'excluir_profissional' profissional.id %}" class="delete-btn">Excluir</a>
+                            <a href="{% url 'editar_forma_pagamento' forma.id %}" class="edit-btn">Editar</a>
+                            <a href="{% url 'excluir_forma_pagamento' forma.id %}" class="delete-btn">Excluir</a>
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="4" style="text-align: center;">Nenhum profissional cadastrado.</td>
+                        <td colspan="2" style="text-align: center;">Nenhuma forma de pagamento cadastrada.</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-        <a href="{% url 'cadastrar_profissional' %}" class="btn">Cadastrar Novo Profissional</a>
+        <a href="{% url 'cadastrar_forma_pagamento' %}" class="btn">Cadastrar Nova Forma</a>
         <a href="{% url 'home' %}" class="btn">Voltar</a>
     </div>
 </body>

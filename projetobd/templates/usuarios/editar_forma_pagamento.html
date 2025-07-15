@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Forma de Pagamento</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 20px; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+        .container { max-width: 600px; width: 100%; margin: auto; background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #666; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+        .actions { margin-top: 20px; display: flex; justify-content: space-between; }
+        .btn { text-decoration: none; color: #333; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px; transition: background-color 0.3s; }
+        .btn-save { background-color: #e0f7e9; }
+        .btn-cancel { background-color: #ffe0e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Forma de Pagamento</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" name="descricao" value="{{ forma_pagamento.descricao }}" required>
+            </div>
+            <div class="actions">
+                <button type="submit" class="btn btn-save">Salvar Alterações</button>
+                <a href="{% url 'listar_formas_pagamento' %}" class="btn btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
